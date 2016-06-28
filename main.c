@@ -12,6 +12,20 @@
 
 DUDA_REGISTER("Duda I/O Examples", "Hello World");
 
+void cb_aa(duda_request_t *dr)
+{
+    response->http_status(dr, 200);
+    response->printf(dr, "This is AA\n");
+    response->end(dr, NULL);
+}
+
+void cb_bb(duda_request_t *dr)
+{
+    response->http_status(dr, 200);
+    response->printf(dr, "This is BB\n");
+    response->end(dr, NULL);
+}
+
 void cb_test(duda_request_t *dr)
 {
     response->http_status(dr, 200);
@@ -45,6 +59,8 @@ void cb_main(duda_request_t *dr)
 
 int duda_main()
 {
+    map->static_add("/aa", "cb_aa");
+    map->static_add("/bb", "cb_bb");
 
     map->static_add("/test", "cb_test");
     map->static_root("cb_main");
